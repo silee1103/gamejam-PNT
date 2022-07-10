@@ -7,14 +7,27 @@ using System;
 
 public class GameStateManager : MonoBehaviour
 {
+    public static GameStateManager Instance { get; private set; }
+    
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
+
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     public void StartStoryBtn()
     {
-        SceneManager.LoadScene("Story1", LoadSceneMode.Single);
+        SceneManager.LoadScene("Story2", LoadSceneMode.Single);
     }
 
     public void StartLevelBtn(){
-        SceneManager.LoadScene("LevelChoose", LoadSceneMode.Single);
+        SceneManager.LoadScene("Choose", LoadSceneMode.Single);
     }
 
     public void QuitBtn()
